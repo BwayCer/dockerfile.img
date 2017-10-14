@@ -1,4 +1,4 @@
-船塢工人文件
+啟用系統精靈
 =======
 
 
@@ -11,7 +11,7 @@
 ## 簡介
 
 
-**底層映像：** [船塢工人映像檔](https://hub.docker.com/search/)<br />
-**描　　述：** 關於本映像檔描述。<br />
+**底層映像：** [centos:latest](https://hub.docker.com/_/centos/)<br />
+**描　　述：** 啟用系統精靈 `systemd`。<br />
 <br />
 
