@@ -1,4 +1,4 @@
-FROM centos
+FROM bwaycer/enable-systemd.centos
 
 MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
@@ -15,5 +15,4 @@ RUN yum install -y bash-completion \
 RUN yum clean all
 
 
-CMD sh /home/bwaycer/dockerEnvtree.sh; \
-    bash
+CMD /usr/sbin/init
