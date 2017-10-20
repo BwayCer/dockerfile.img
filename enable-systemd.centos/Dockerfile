@@ -14,5 +14,5 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; \
     rm -f /lib/systemd/system/basic.target.wants/*; \
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-# VOLUME /sys/fs/cgroup
-CMD /usr/sbin/init
+# VOLUME [ "/sys/fs/cgroup" ]
+CMD [ "/usr/sbin/init" ]

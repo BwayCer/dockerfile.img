@@ -15,4 +15,4 @@ RUN yum install -y bash-completion \
 RUN yum clean all
 
 
-CMD /usr/sbin/init
+CMD [ "/usr/sbin/init" ]

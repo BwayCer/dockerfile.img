@@ -41,4 +41,4 @@ echo ''\n\
 echo 'systemctl restart httpd; systemctl restart mysql'\n" > ~/installOwnCloud.sh
 
 
-CMD /usr/sbin/init
+CMD [ "/usr/sbin/init" ]
