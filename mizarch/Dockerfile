@@ -3,12 +3,22 @@ FROM base/archlinux
 MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-RUN cat /etc/pacman.d/mirrorlist | sed '1i \
+# 不清楚為何 Docker Hub 沒有 rankmirrors 命令，故此命令請自行檢查
+# 如果沒有使用預設站點，在本地執行 `pacman -Syu` 會有以下訊息
+# error: failed to update extra (no servers configured for repository)
+# 鏡像站點： 臺灣
+RUN if type rankmirrors &> /dev/null; then \
+        echo -e '\
 Server = http://ftp.tku.edu.tw/Linux/ArchLinux/$repo/os/$arch\n\
 Server = https://shadow.ind.ntou.edu.tw/archlinux/$repo/os/$arch\n\
 Server = http://archlinux.cs.nctu.edu.tw/$repo/os/$arch\n\
 Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch\
-' | rankmirrors -n 3 - > /etc/pacman.d/mirrorlist
+' | rankmirrors -n 3 - >> /etc/pacman.d/mirrorlist; \
+        cat /etc/pacman.d/mirrorlist; \
+    else \
+        echo '使用預設的鏡像站。'; \
+    fi
+
 
 # RUN pacman -Rs arch-install-scripts
 RUN pacman -Syu --noconfirm
