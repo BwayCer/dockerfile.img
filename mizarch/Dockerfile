@@ -1,27 +1,23 @@
-FROM base/archlinux
+FROM archlinux/base
 
 MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-# 不清楚為何 Docker Hub 沒有 rankmirrors 命令，故此命令請自行檢查
-# 如果沒有使用預設站點，在本地執行 `pacman -Syu` 會有以下訊息
-# error: failed to update extra (no servers configured for repository)
+# 執行 `pacman -Syu` 出現以下錯誤訊息：
+#     error: failed to update extra (no servers configured for repository)
+# 請檢查：
+#   1. `docker build` 是否有設置 `--network=host` 選項開啟網路權限。
+#   2. /etc/pacman.d/mirrorlist 文件下是否存在鏡像站點。
+
 # 鏡像站點： 臺灣
-RUN if type rankmirrors &> /dev/null; then \
-        echo -e '\
+RUN sed -i '1i \
 Server = http://ftp.tku.edu.tw/Linux/ArchLinux/$repo/os/$arch\n\
 Server = https://shadow.ind.ntou.edu.tw/archlinux/$repo/os/$arch\n\
 Server = http://archlinux.cs.nctu.edu.tw/$repo/os/$arch\n\
 Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch\
-' | rankmirrors -n 3 - >> /etc/pacman.d/mirrorlist; \
-        cat /etc/pacman.d/mirrorlist; \
-    else \
-        echo '使用預設的鏡像站。'; \
-    fi
+' /etc/pacman.d/mirrorlist
+RUN cat /etc/pacman.d/mirrorlist
 
-
-# RUN pacman -Rs arch-install-scripts
-RUN pacman -Syu --noconfirm
 
 ## 時間跟隨主機
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
@@ -33,21 +29,24 @@ ENV LC_TIME en_US.UTF-8
 # ENV LC_ALL  zh_TW.UTF-8
 
 
-RUN pacman -S --noconfirm \
-        systemd \
-        iproute2
+# RUN pacman -Rs arch-install-scripts
+RUN pacman -Syu --noconfirm pacman
+RUN pacman -Syu --noconfirm
+RUN yes "" | sed '1,3s/^/n/' | pacman -S base base-devel bash-completion vim \
+    --ignore filesystem \
+    --ignore vi \
+    --ignore nano
 
+
+RUN pacman -S --noconfirm openssh
+RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+RUN systemctl enable sshd.service
+
+# 常用程式包
 RUN pacman -S --noconfirm \
-        bash-completion vim \
-        sudo openssh \
-        git tmux tree wget \
-        python
+        sudo git tmux wget tree \
+        python p7zip cifs-utils
         # openssh 為 git 與遠程端通訊的工具
         # python 為 vim 程式包的依賴
-
-RUN ln -s /usr/bin/vim /usr/bin/vi
-
-RUN pacman -S --noconfirm \
-        cifs-utils ntfs-3g exfat-utils \
-        unzip
+        # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
 

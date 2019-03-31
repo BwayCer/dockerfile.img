@@ -4,7 +4,7 @@
 
 > **版　本：** v1.2.0
 
-> **基底映像：** [base/archlinux:latest](https://hub.docker.com/r/base/archlinux/)
+> **基底映像：** [archlinux/base:latest](https://hub.docker.com/r/archlinux/base/)
 
 > **拉取映像：** [`docker pull bwaycer/mizarch`](https://hub.docker.com/r/bwaycer/mizarch/)
 
@@ -38,4 +38,14 @@ Server = http://archlinux.cs.nctu.edu.tw/$repo/os/$arch
 Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch
 ' | rankmirrors -n 3 - >> /etc/pacman.d/mirrorlist
 ```
+
+
+
+### base 安裝包安裝失敗
+
+需先執行 `RUN pacman -Syu pacman` 命令安裝 `pacman` 工具。
+
+然後避開特定安裝包，目前已知如下：
+
+  * `filesystem`
 
