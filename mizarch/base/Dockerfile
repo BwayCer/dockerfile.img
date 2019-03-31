@@ -50,3 +50,10 @@ RUN pacman -S --noconfirm \
         # python 為 vim 程式包的依賴
         # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
 
+# visudo
+#   # %wheel ALL=(ALL) NOPASSWD: ALL
+RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# 用戶
+RUN useradd -m -u 1000 -G wheel bwaycer
+
