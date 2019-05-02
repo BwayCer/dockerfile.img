@@ -7,7 +7,7 @@ MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## 中文語系
-RUN sed -i "s/^#\(\(en_US\|zh_TW\).UTF-8 UTF-8\)/\1/" /etc/locale.gen; \
+RUN echo -e "en_US.UTF-8 UTF-8\nzh_TW.UTF-8 UTF-8" > /etc/locale.gen; \
     locale-gen
 ENV LANG    zh_TW.UTF-8
 ENV LC_TIME en_US.UTF-8
