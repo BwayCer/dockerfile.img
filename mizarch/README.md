@@ -22,13 +22,15 @@
 
 ### 增加鏡像站點問題
 
+
 由於在本地 `pacman -Syu` 會有以下訊息：
 
 ```
 error: failed to update extra (no servers configured for repository)
 ```
 
-解決方法是更改鏡像站，但船塢工人中心缺少 `rankmirrors` 命令，所以以下命令請自行設定：
+解決方法是更改鏡像站。
+但船塢工人中心缺少 `rankmirrors` 鏡像站競速工具，所以以下鏡像站節點請自行排序：
 
 ```
 echo '
@@ -42,6 +44,7 @@ Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch
 
 
 ### base 安裝包安裝失敗
+
 
 需先執行 `RUN pacman -Syu pacman` 命令安裝 `pacman` 工具。
 
