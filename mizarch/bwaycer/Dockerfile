@@ -3,6 +3,15 @@ FROM bwaycer/mizarch:base
 MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
+# 在非 PID 1 init 進程中調用 systemctl 命令會以 `exit 1` 退出並顯示以下訊息：
+# ```
+# System has not been booted with systemd as init system (PID 1). Can't operate.
+# Failed to connect to bus: Host is down
+# ```
+RUN cp "/bin/systemctl" "/bin/systemctl.real"; \
+    echo "echo In Docker." > "/bin/systemctl"
+
+
 ## 臺北時間
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 

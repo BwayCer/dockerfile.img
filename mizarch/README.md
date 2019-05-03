@@ -52,3 +52,20 @@ Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch
 
   * `filesystem`
 
+
+
+### 在容器內無法執行 systemctl 命令
+
+
+在非 PID 1 init 進程中調用 systemctl 命令會顯示以下錯誤訊息：
+
+```
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+```
+
+___不推薦！___
+若真有執行其必要，可參考
+[GitHub gdraheim/docker-systemctl-replacement](https://github.com/gdraheim/docker-systemctl-replacement)
+說明。
+
