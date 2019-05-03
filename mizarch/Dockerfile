@@ -1,4 +1,4 @@
-FROM local/mizarch:base
+FROM local/mizarch:bwaycer
 
 MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
