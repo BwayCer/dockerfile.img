@@ -30,13 +30,9 @@ RUN pacman -Syu --noconfirm && \
         --ignore nano && \
     ln -s /usr/bin/vim /usr/bin/vi
 
-RUN pacman -S --noconfirm openssh
-RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
-RUN systemctl enable sshd.service
-
 # 常用程式包
 RUN pacman -S --noconfirm \
-        sudo git tmux wget tree \
+        sudo openssh git tmux wget tree \
         python p7zip cifs-utils
         # openssh 為 git 與遠程端通訊的工具
         # python 為 vim 程式包的依賴
