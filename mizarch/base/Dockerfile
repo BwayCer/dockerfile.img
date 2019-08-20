@@ -15,12 +15,11 @@ Server = http://ftp.tku.edu.tw/Linux/ArchLinux/$repo/os/$arch\n\
 Server = https://shadow.ind.ntou.edu.tw/archlinux/$repo/os/$arch\n\
 Server = http://archlinux.cs.nctu.edu.tw/$repo/os/$arch\n\
 Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch\
-' /etc/pacman.d/mirrorlist
-RUN cat /etc/pacman.d/mirrorlist
+' /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist
 
 
 # 安裝基礎程式包
 # RUN pacman -Rs arch-install-scripts
-RUN pacman -Sy --noconfirm pacman
-RUN pacman -S --noconfirm vim
+RUN pacman -Sy --noconfirm pacman && \
+    pacman -S --noconfirm vim
 

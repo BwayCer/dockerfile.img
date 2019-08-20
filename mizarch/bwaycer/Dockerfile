@@ -8,7 +8,7 @@ MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 # System has not been booted with systemd as init system (PID 1). Can't operate.
 # Failed to connect to bus: Host is down
 # ```
-RUN cp "/bin/systemctl" "/bin/systemctl.real"; \
+RUN cp "/bin/systemctl" "/bin/systemctl.real" && \
     echo "echo In Docker." > "/bin/systemctl"
 
 
@@ -16,18 +16,18 @@ RUN cp "/bin/systemctl" "/bin/systemctl.real"; \
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## 中文語系
-RUN echo -e "en_US.UTF-8 UTF-8\nzh_TW.UTF-8 UTF-8" > /etc/locale.gen; \
+RUN echo -e "en_US.UTF-8 UTF-8\nzh_TW.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
-ENV LANG    zh_TW.UTF-8
-ENV LC_TIME en_US.UTF-8
-# ENV LC_ALL  zh_TW.UTF-8
+ENV LANG=zh_TW.UTF-8 \
+    LC_TIME=en_US.UTF-8
+# ENV LC_ALL=zh_TW.UTF-8
 
 
-RUN pacman -Syu --noconfirm
-RUN yes "" | sed "1,3s/^/n/" | pacman -S base base-devel bash-completion vim \
-    --ignore filesystem \
-    --ignore vi \
-    --ignore nano
+RUN pacman -Syu --noconfirm && \
+    yes "" | sed "1,3s/^/n/" | pacman -S base base-devel bash-completion vim \
+        --ignore filesystem \
+        --ignore vi \
+        --ignore nano
 
 RUN pacman -S --noconfirm openssh
 RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
