@@ -27,7 +27,8 @@ RUN pacman -Syu --noconfirm && \
     yes "" | sed "1,3s/^/n/" | pacman -S base base-devel bash-completion vim \
         --ignore filesystem \
         --ignore vi \
-        --ignore nano
+        --ignore nano && \
+    ln -s /usr/bin/vim /usr/bin/vi
 
 RUN pacman -S --noconfirm openssh
 RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
