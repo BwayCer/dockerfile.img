@@ -1,7 +1,6 @@
+# MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
+
 FROM archlinux/base
-
-MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
-
 
 # 執行 `pacman -Syu` 出現以下錯誤訊息：
 #     error: failed to update extra (no servers configured for repository)

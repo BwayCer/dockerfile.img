@@ -1,7 +1,6 @@
-FROM bwaycer/mizarch:base
+# MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
-MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
-
+FROM local/mizarch:base
 
 # 在非 PID 1 init 進程中調用 systemctl 命令會以 `exit 1` 退出並顯示以下訊息：
 # ```
