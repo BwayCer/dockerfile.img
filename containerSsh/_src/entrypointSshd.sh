@@ -8,8 +8,9 @@
 fnEntrypoint() {
     whoami 1> /dev/null || exit 1
 
-    mkdir "$HOME/.ssh" &&
-        chmod 700 /root/.ssh &&
+    [ ! -d "$HOME/.ssh" ] &&
+        mkdir "$HOME/.ssh" &&
+        chmod 700 "$HOME/.ssh" &&
         cp /sshAuthorizedKeys "$HOME/.ssh/authorized_keys" &&
         chmod 600 "$HOME/.ssh/authorized_keys"
 
