@@ -2,7 +2,7 @@
 =======
 
 
-> **版　本：** v2.0.0
+> **版　本：** v2.1.0
 
 > **基底映像：** [archlinux/base:latest](https://hub.docker.com/r/archlinux/base/)
 
