@@ -7,21 +7,33 @@
 那**建築**的**相片**， 我**跑**在裡面。
 
 
-**建議專案目錄結構：**
+
+**頁籤**<br>
+　- [專案目錄結構](#專案目錄結構) - [推薦相關文章](#推薦相關文章) -
+
+
+
+## 專案目錄結構
+
 
 ```
 ─┬ 專案目錄/
- ├─┬ vmfile/ ---------------------------- (相當於本專案中個別的主題目錄)
- │ ├─┬ _bin/ ---------------------------- 可執行文件目錄。
- │ │ └── build.sh ----------------------- 主要的建立虛擬環境腳本。
- │ ├── _src/ ---------------------------- 船塢工人文件資源目錄。
- │ ├── [otherName.dockerfile ...] ------- 其他的船塢工人文件。
- │ ├── Dockerfile ----------------------- 主要的船塢工人文件。
- │ └── build.sh ------------------------- `vmfile/_bin/build.sh` 路徑的鏈結文件。
- └── .dockerignore
+ └─┬ vmfile/ ------------------------------ (相當於本專案中個別的主題目錄)
+   └─┬ <itemName ...>/ -------------------- -- 容器項目名稱
+     ├─┬ bin/ ----------------------------- -- -- 可執行文件目錄。
+     │ └── build.sh ----------------------- -- -- -- 主要的建立虛擬環境腳本。
+     ├── repo/ ---------------------------- -- -- 資源目錄。
+     ├── [otherName.dockerfile ...] ------- -- -- 其他的船塢工人文件。
+     ├── Dockerfile ----------------------- -- -- 主要的船塢工人文件。
+     ├── build.sh ------------------------- -- -- link -> ./bin/build.sh
+     └── [.dockerignore] ------------------ -- -- 船塢工人忽略文件。
 ```
 
-**見更多相關文章：**
-  * [如何写Dockerfile，Dockerfile 参考文档 | Deepzz's Blog](https://deepzz.com/post/dockerfile-reference.html)
-  * [.dockerignore](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+
+
+## 推薦相關文章
+
+
+* [如何写Dockerfile，Dockerfile 参考文档 | Deepzz's Blog](https://deepzz.com/post/dockerfile-reference.html)
+* [dockerignore file | Docker Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 
