@@ -1,15 +1,35 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
-FROM local/mizarch:base
 
-# 在非 PID 1 init 進程中調用 systemctl 命令會以 `exit 1` 退出並顯示以下訊息：
-# ```
-# System has not been booted with systemd as init system (PID 1). Can't operate.
-# Failed to connect to bus: Host is down
-# ```
-RUN cp "/bin/systemctl" "/bin/systemctl.real" && \
-    echo "echo In Docker." > "/bin/systemctl"
+FROM archlinux/base
 
+ARG una=bwaycer
+ARG uid=1000
+
+# 鏡像站點： 臺灣
+RUN sed -i '1i \
+Server = http://ftp.tku.edu.tw/Linux/ArchLinux/$repo/os/$arch\n\
+Server = https://shadow.ind.ntou.edu.tw/archlinux/$repo/os/$arch\n\
+Server = http://archlinux.cs.nctu.edu.tw/$repo/os/$arch\n\
+Server = https://ftp.yzu.edu.tw/Linux/archlinux/$repo/os/$arch\
+' /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist
+
+# 程式包更新
+RUN pacman -Sy --noconfirm pacman && \
+    pacman -Su --noconfirm
+# 安裝常用程式包
+RUN pacman -S --noconfirm \
+        base base-devel bash-completion vim \
+        sudo openssh git tmux wget tree \
+        python p7zip cifs-utils && \
+    ln -s /usr/bin/vim /usr/bin/vi
+    # openssh 為 git 與遠程端通訊的工具
+    # python 為 vim 程式包的依賴
+    # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
+
+# visudo
+#   # %wheel ALL=(ALL) NOPASSWD: ALL
+RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 ## 臺北時間
 RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
@@ -21,26 +41,6 @@ ENV LANG=zh_TW.UTF-8 \
     LC_TIME=en_US.UTF-8
 # ENV LC_ALL=zh_TW.UTF-8
 
-
-RUN pacman -Syu --noconfirm && \
-    yes "" | sed "1,3s/^/n/" | pacman -S base base-devel bash-completion vim \
-        --ignore filesystem \
-        --ignore vi \
-        --ignore nano && \
-    ln -s /usr/bin/vim /usr/bin/vi
-
-# 常用程式包
-RUN pacman -S --noconfirm \
-        sudo openssh git tmux wget tree \
-        python p7zip cifs-utils
-        # openssh 為 git 與遠程端通訊的工具
-        # python 為 vim 程式包的依賴
-        # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
-
-# visudo
-#   # %wheel ALL=(ALL) NOPASSWD: ALL
-RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
 # 用戶
-RUN useradd -m -u 1000 -G wheel bwaycer
+RUN useradd -m -u "$uid" -G wheel "$una"
 
