@@ -13,6 +13,7 @@ RUN apk upgrade --no-cache && \
         bash-completion vim \
         docker sudo openssh git git-perl tmux wget tree \
         rsync p7zip cifs-utils && \
+    /tmp/buildRepo/otherAdd.sh rclone && \
     ln -sf /usr/bin/vim /usr/bin/vi
     # iproute2 為網路工具箱。 (包含 `ss` 命令)
     # tzdata 為設置時區的程式包。

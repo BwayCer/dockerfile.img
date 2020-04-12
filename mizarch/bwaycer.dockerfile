@@ -21,7 +21,7 @@ RUN pacman -Sy --noconfirm pacman && \
 RUN pacman -S --noconfirm \
         base base-devel bash-completion vim \
         docker sudo openssh git tmux wget tree \
-        rsync p7zip cifs-utils && \
+        rsync rclone p7zip cifs-utils && \
     ln -s /usr/bin/vim /usr/bin/vi
     # openssh 為 git 與遠程端通訊的工具
     # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
