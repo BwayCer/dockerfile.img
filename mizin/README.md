@@ -2,7 +2,7 @@
 =======
 
 
-> **版　本：** v0.0.0
+> **版　本：** v1.0.0
 
 > **基底映像：** [alpine:latest](https://hub.docker.com/_/alpine)
 
