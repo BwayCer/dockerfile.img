@@ -20,11 +20,10 @@ RUN pacman -Sy --noconfirm pacman && \
 # 安裝常用程式包
 RUN pacman -S --noconfirm \
         base base-devel bash-completion vim \
-        sudo openssh git tmux wget tree \
-        python p7zip cifs-utils && \
+        docker sudo openssh git tmux wget tree \
+        rsync p7zip cifs-utils && \
     ln -s /usr/bin/vim /usr/bin/vi
     # openssh 為 git 與遠程端通訊的工具
-    # python 為 vim 程式包的依賴
     # cifs-utils 為 mount.cifs 共享遠程文件掛載工具
 
 # visudo
@@ -42,5 +41,5 @@ ENV LANG=zh_TW.UTF-8 \
 # ENV LC_ALL=zh_TW.UTF-8
 
 # 用戶
-RUN useradd -m -u "$uid" -G wheel "$una"
+RUN useradd -m -u "$uid" -G wheel,docker "$una"
 

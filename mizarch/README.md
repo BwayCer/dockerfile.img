@@ -4,16 +4,17 @@
 
 > **版　本：** v2.1.0
 
-> **基底映像：** [archlinux/base:latest](https://hub.docker.com/r/archlinux/base/)
+> **基底映像：** [archlinux/base:latest](https://hub.docker.com/r/archlinux/base)
 
-> **拉取映像：** [`docker pull bwaycer/mizarch`](https://hub.docker.com/r/bwaycer/mizarch/)
+> **建立映像：** local/mizarch:latest
 
 
 
 ## 簡介
 
 
-本微與拱門林納斯。
+本微與拱門林納斯，
+打造可攜帶並隔離主環境的開發測試環境。
 
 
 
