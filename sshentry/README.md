@@ -9,9 +9,8 @@
 ## 標籤資訊
 
 
-* [`alpine`](./alpine.dockerfile)
-* [`archlinux`](./archlinux.dockerfile)
 * [`mizarch`](./mizarch.dockerfile)
+* [`mizin`](./mizin.dockerfile)
 
 
 

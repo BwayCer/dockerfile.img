@@ -1,19 +1,21 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-FROM archlinux/base
+FROM local/mizin:latest
 
+ARG sshExposePort=8022
 COPY ./repo/ /tmp/buildRepo/
 COPY ./repo/entrypointSshd.sh /dockerEntrypoint.sh
 COPY ./repo/sshKey/ /etc/ssh/
 
-RUN pacman -Sy --noconfirm grep openssh && \
+RUN passwd -d root && \
+    apk add --no-cache openssh-server && \
     sh /tmp/buildRepo/insertSshdConfig.sh \
-        "Port 8022" "#Port 22" \
+        "Port $sshExposePort" "#Port 22" \
         "PasswordAuthentication no" "#PasswordAuthentication" && \
     rm -rf /tmp/buildRepo/
 
-EXPOSE 8022
+EXPOSE $sshExposePort
 ENTRYPOINT ["/dockerEntrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
 

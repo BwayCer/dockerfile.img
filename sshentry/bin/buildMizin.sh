@@ -13,7 +13,7 @@ _shBase_loadfile="$projectDir/bin/build.lib.sh"
 source "$projectDir/bin/buildSsh.lib.sh"
 
 fnBuild "$@" \
-    -t "local/sshentry:alpine" \
-    -f "$projectDir/alpine.dockerfile" \
+    -t "local/sshentry:mizin" \
+    -f "$projectDir/mizin.dockerfile" \
     "$projectDir"
 
