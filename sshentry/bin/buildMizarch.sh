@@ -10,8 +10,6 @@ _shBase_loadfile="$projectDir/bin/build.lib.sh"
     source "$projectDir/bin/build.lib.sh" ||
     source <(curl "https://raw.githubusercontent.com/BwayCer/image.docker/tree/master/bin/build.lib.sh")
 
-source "$projectDir/bin/buildSsh.lib.sh"
-
 fnBuild "$@" \
     -t "local/sshentry:mizarch" \
     -f "$projectDir/mizarch.dockerfile" \

@@ -6,9 +6,9 @@ FROM local/mizarch:latest
 ARG sshExposePort=8022
 COPY ./repo/ /tmp/buildRepo/
 COPY ./repo/entrypointSshd.sh /dockerEntrypoint.sh
-COPY ./repo/sshKey/ /etc/ssh/
 
 RUN pacman -Sy --noconfirm grep openssh && \
+    /tmp/buildRepo/createSshKey.sh && \
     sh /tmp/buildRepo/insertSshdConfig.sh \
         "Port $sshExposePort" "#Port 22" \
         "PasswordAuthentication no" "#PasswordAuthentication" && \
