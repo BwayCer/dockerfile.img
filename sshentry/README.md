@@ -1,4 +1,4 @@
-安全殼容器
+安全殼入口
 =======
 
 
@@ -15,6 +15,13 @@
 
 
 
+## 簡介
+
+
+建立可使用安全殼連線容器。
+
+
+
 ## 使用說明
 
 
@@ -22,7 +29,7 @@
 docker run -td \
     -v ~/.ssh/authorized_keys:/sshAuthorizedKeys \
     --network host \
-    local/containerssh:<tag>
+    local/sshEntry:<tag>
 
 # or
 
@@ -30,6 +37,6 @@ docker run -td \
     -v ~/.ssh/authorized_keys:/sshAuthorizedKeys \
     -p 8022:8022 \
     --network container:<name> \
-    local/containerssh:<tag>
+    local/sshEntry:<tag>
 ```
 
