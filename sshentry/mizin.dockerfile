@@ -5,17 +5,16 @@ FROM local/mizin:latest
 
 ARG sshExposePort=8022
 COPY ./repo/ /tmp/buildRepo/
-COPY ./repo/entrypointSshd.sh /dockerEntrypoint.sh
 
 RUN passwd -d root && \
     apk add --no-cache openssh-server && \
     /tmp/buildRepo/createSshKey.sh && \
     sh /tmp/buildRepo/insertSshdConfig.sh \
         "Port $sshExposePort" "#Port 22" \
+        "AuthorizedKeysFile /sshAuthorizedKeys" "AuthorizedKeysFile	.ssh/authorized_keys" \
         "PasswordAuthentication no" "#PasswordAuthentication" && \
     rm -rf /tmp/buildRepo/
 
 EXPOSE $sshExposePort
-ENTRYPOINT ["/dockerEntrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
 

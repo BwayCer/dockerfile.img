@@ -19,6 +19,8 @@ do
     prevVal=""
 
     lineNum=`grep -nm 1 "^$key" "$sshdConfigPath" | sed "s/^ *\([0-9]\+\):.*$/\1/"`
+    [ "${key:0:1}" != "#" ] && [ -n "$lineNum" ] \
+        && sed -i "${lineNum}c #$key" "$sshdConfigPath" || :
     [ -n "$lineNum" ] \
         && sed -i "${lineNum}a $insertTxt" "$sshdConfigPath" \
         || echo "$insertTxt" >> "$sshdConfigPath"
