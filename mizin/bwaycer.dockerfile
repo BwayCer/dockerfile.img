@@ -10,8 +10,9 @@ COPY ./repo/ /tmp/buildRepo/
 # 安裝常用程式包
 RUN apk upgrade --no-cache && \
     apk add --no-cache \
-        tzdata ncurses curl tar bash bash-completion vim \
-        docker sudo openssh git tmux wget tree \
+        iproute2 tzdata ncurses grep less curl tar bash \
+        bash-completion vim \
+        docker sudo openssh git git-perl tmux wget tree \
         rsync p7zip cifs-utils && \
     ln -sf /usr/bin/vim /usr/bin/vi
     # tzdata 為設置時區的程式包。
