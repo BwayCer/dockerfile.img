@@ -11,7 +11,7 @@ _shBase_loadfile="$projectDir/bin/build.lib.sh"
     source <(curl "https://raw.githubusercontent.com/BwayCer/image.docker/tree/master/bin/build.lib.sh")
 
 fnBuild "$@" \
-    -t "local/sshentry:mizin" \
-    -f "$projectDir/mizin.dockerfile" \
+    -t "local/sshentry:archlinux" \
+    -f "$projectDir/archlinux.dockerfile" \
     "$projectDir"
 

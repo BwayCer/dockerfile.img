@@ -1,12 +1,13 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-FROM local/mizarch:latest
+FROM alpine
 
 ARG sshExposePort=8022
 COPY ./repo/ /tmp/buildRepo/
 
-RUN pacman -Sy --noconfirm grep openssh && \
+RUN passwd -d root && \
+    apk add --no-cache openssh-server && \
     /tmp/buildRepo/createSshKey.sh && \
     sh /tmp/buildRepo/insertSshdConfig.sh \
         "Port $sshExposePort" "#Port 22" \

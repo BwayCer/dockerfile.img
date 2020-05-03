@@ -1,13 +1,12 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-FROM local/mizin:latest
+FROM archlinux/base
 
 ARG sshExposePort=8022
 COPY ./repo/ /tmp/buildRepo/
 
-RUN passwd -d root && \
-    apk add --no-cache openssh-server && \
+RUN pacman -Sy --noconfirm grep openssh && \
     /tmp/buildRepo/createSshKey.sh && \
     sh /tmp/buildRepo/insertSshdConfig.sh \
         "Port $sshExposePort" "#Port 22" \
