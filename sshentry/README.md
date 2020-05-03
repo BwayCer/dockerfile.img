@@ -25,17 +25,13 @@
 
 
 ```
-docker run -td \
-    -v ~/.ssh/authorized_keys:/sshAuthorizedKeys \
-    --network host \
-    local/sshEntry:<tag>
-
-# or
-
+# 建立安全殼入口容器
 docker run -td \
     -v ~/.ssh/authorized_keys:/sshAuthorizedKeys \
     -p 8022:8022 \
-    --network container:<name> \
     local/sshEntry:<tag>
+
+# 安全殼連線
+ssh -p 8022 -i <安全殼金鑰文件路徑> [user@]<ip/hostname>
 ```
 
