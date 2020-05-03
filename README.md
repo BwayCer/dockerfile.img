@@ -19,6 +19,7 @@
 
 * [mizarch](./mizarch) : 以 Archlinux 打造可攜帶並隔離主環境的開發測試環境。
 * [mizin](./mizin)     : 以 Alpine 打造可攜帶並隔離主環境的開發測試環境。
+* [sshentry](./sshentry) : 建立可使用安全殼連線容器。
 
 
 
