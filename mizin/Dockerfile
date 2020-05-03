@@ -1,7 +1,7 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-FROM local/mizin:bwaycer
+FROM local/mizin:sshentry
 
 RUN apk upgrade --no-cache
 

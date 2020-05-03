@@ -1,7 +1,7 @@
 # MAINTAINER BwayCer (https://github.com/BwayCer/image.docker)
 
 
-FROM local/mizarch:bwaycer
+FROM local/mizarch:sshentry
 
 RUN pacman -Syu --noconfirm
 
