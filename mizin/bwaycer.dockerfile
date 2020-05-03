@@ -5,7 +5,6 @@ FROM alpine
 
 ARG una=bwaycer
 ARG uid=1000
-COPY ./repo/ /tmp/buildRepo/
 
 # 安裝常用程式包
 RUN apk upgrade --no-cache && \
@@ -39,6 +38,4 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 # 用戶
 RUN adduser --uid "$uid" -h "/home/$una" --disabled-password "$una" && \
     for groupName in wheel docker; do addgroup "$una" "$groupName"; done
-
-RUN rm -rf /tmp/buildRepo/
 
