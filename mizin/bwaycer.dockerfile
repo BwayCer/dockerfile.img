@@ -14,6 +14,7 @@ RUN apk upgrade --no-cache && \
         docker sudo openssh git git-perl tmux wget tree \
         rsync p7zip cifs-utils && \
     ln -sf /usr/bin/vim /usr/bin/vi
+    # iproute2 為網路工具箱。 (包含 `ss` 命令)
     # tzdata 為設置時區的程式包。
     # ncurses 為擬終端的類圖形介面工具箱，其中包含 `tput` 命令。
 
